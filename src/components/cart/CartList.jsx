@@ -19,8 +19,12 @@ import {
 } from "mdb-react-ui-kit";
 import SingleCartItem from "./SingleCartItem";
 import CartSummary from "./CartSummary";
+import { useSelector } from "react-redux";
+import { getCartSelector } from "../../redux/slices/cartSlice";
 
 export default function CartList() {
+  const cart = useSelector(getCartSelector);
+  console.log(cart);
   return (
     <section className="cart-list">
       <MDBRow className="justify-content-center my-4">
@@ -28,11 +32,15 @@ export default function CartList() {
           <MDBCard className="mb-4">
             <MDBCardHeader className="py-3">
               <MDBTypography tag="h5" className="mb-0">
-                Cart - 2 items
+                Cart - {cart.length} items
               </MDBTypography>
             </MDBCardHeader>
             <MDBCardBody>
-              <SingleCartItem />
+              {cart.map((item, index) => {
+                return (
+                  <SingleCartItem item={item} key={`cart-items-${index}`} />
+                );
+              })}
             </MDBCardBody>
           </MDBCard>
         </MDBCol>

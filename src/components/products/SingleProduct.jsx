@@ -7,6 +7,7 @@ import {
   MDBCardTitle,
   MDBCol,
   MDBRipple,
+  MDBRow,
 } from "mdb-react-ui-kit";
 import "./SingleProduct.style.css";
 import { useState } from "react";
@@ -24,14 +25,14 @@ export default function SingleProduct(props) {
   const [addedToCart, setAddedToCart] = useState(false);
   const dispatch = useDispatch();
 
-  const addItemToCart = () => {
+  const addItemToCart = (id, name, img, price) => {
     setAddedToCart(true);
-    dispatch(addToCart({ id: 45 }));
+    dispatch(addToCart({ id: id, name: name, img: img, price: price }));
   };
 
-  const removeFromCart = () => {
+  const removeItemFromCart = (id) => {
     setAddedToCart(false);
-    dispatch();
+    dispatch(removeFromCart({ id: id }));
   };
 
   return (
@@ -56,20 +57,32 @@ export default function SingleProduct(props) {
           </a>
         </MDBRipple>
         <MDBCardBody>
-          <MDBCardTitle className="product-title">{item.name}</MDBCardTitle>
+          <MDBRow>
+            <MDBCol lg="8">
+              <MDBCardTitle className="product-title">{item.name}</MDBCardTitle>
+            </MDBCol>
+            <MDBCol lg="4">
+              <h6>₹ {item.price}</h6>
+            </MDBCol>
+          </MDBRow>
 
           <div className="mt-3 d-grid gap-2">
             {addedToCart ? (
               <MDBBtn
                 color="danger"
                 onClick={() => {
-                  removeFromCart();
+                  removeItemFromCart(item.id);
                 }}
               >
                 Remove
               </MDBBtn>
             ) : (
-              <MDBBtn color="primary" onClick={() => addItemToCart()}>
+              <MDBBtn
+                color="primary"
+                onClick={() =>
+                  addItemToCart(item.id, item.name, item.img, item.price)
+                }
+              >
                 Add to Cart
               </MDBBtn>
             )}

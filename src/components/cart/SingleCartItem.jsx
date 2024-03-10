@@ -9,6 +9,8 @@ import {
 } from "mdb-react-ui-kit";
 
 export default function SingleCartItem(props) {
+  const { item } = { ...props };
+
   return (
     <MDBRow>
       <MDBCol lg="3" md="12" className="mb-4 mb-lg-0">
@@ -17,11 +19,8 @@ export default function SingleCartItem(props) {
           rippleColor="light"
           className="bg-image rounded hover-zoom hover-overlay"
         >
-          <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
-            className="w-100"
-          />
-          <a href="#!">
+          <img src={item.img} className="w-100" />
+          <a>
             <div
               className="mask"
               style={{ backgroundColor: "rgba(251, 251, 251, 0.2)" }}
@@ -32,10 +31,8 @@ export default function SingleCartItem(props) {
 
       <MDBCol lg="5" md="6" className=" mb-4 mb-lg-0">
         <p>
-          <strong>Red hoodie</strong>
+          <strong>{item.name}</strong>
         </p>
-        <p>Color: red</p>
-        <p>Size: M</p>
 
         <MDBTooltip
           wrapperProps={{ size: "sm" }}
@@ -59,7 +56,7 @@ export default function SingleCartItem(props) {
         </div>
 
         <p className="text-start text-md-center">
-          <strong>$17.99</strong>
+          <strong>{item.price}</strong>
         </p>
       </MDBCol>
       <hr className="my-4" />
