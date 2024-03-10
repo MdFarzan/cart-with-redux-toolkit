@@ -28,17 +28,20 @@ export default function CartSummary() {
             <MDBListGroupItem className="d-flex justify-content-between align-items-center border-0 px-0 mb-3">
               <div>
                 <strong>Total amount</strong>
-                <strong>
-                  <p className="mb-0">(including VAT)</p>
-                </strong>
               </div>
               <span>
-                <h5>{total}</h5>
+                <h5>₹ {total}</h5>
               </span>
             </MDBListGroupItem>
           </MDBListGroup>
 
-          <MDBBtn block size="lg">
+          <MDBBtn
+            block
+            size="lg"
+            href="https://github.com/MdFarzan/"
+            target="_blank"
+            color="warning"
+          >
             Give a Star
           </MDBBtn>
         </MDBCardBody>

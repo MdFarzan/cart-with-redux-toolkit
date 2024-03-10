@@ -6,3 +6,14 @@
 .cart-qty{
     width:50px;
 }
+
+.cart-qty::-webkit-outer-spin-button,
+.cart-qty::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.cart-qty[type=number] {
+  -moz-appearance: textfield;
+}
