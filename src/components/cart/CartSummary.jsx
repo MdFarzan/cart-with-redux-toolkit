@@ -8,8 +8,13 @@ import {
   MDBListGroupItem,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import { useSelector } from "react-redux";
+import { getCartSelector } from "../../redux/slices/cartSlice";
 
 export default function CartSummary() {
+  const cart = useSelector(getCartSelector);
+  let total = cart.reduce((a, b) => a + b.price * b.qty, 0);
+
   return (
     <MDBCol sm="12">
       <MDBCard className="mb-4">
@@ -28,7 +33,7 @@ export default function CartSummary() {
                 </strong>
               </div>
               <span>
-                <strong>$53.98</strong>
+                <h5>{total}</h5>
               </span>
             </MDBListGroupItem>
           </MDBListGroup>

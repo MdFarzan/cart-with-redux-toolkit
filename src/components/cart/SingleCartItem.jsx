@@ -14,6 +14,7 @@ import {
   incQty,
   removeFromCart,
 } from "../../redux/slices/cartSlice";
+import "./SingleCartItem.style.css";
 
 export default function SingleCartItem(props) {
   const { item } = { ...props };
@@ -68,7 +69,7 @@ export default function SingleCartItem(props) {
       <MDBCol lg="4" md="6" className="mb-4 mb-lg-0">
         <div className="d-flex mb-4">
           <MDBBtn
-            className="px-3 me-2"
+            className="px-3 me-2 cart-inc-btn"
             onClick={() => {
               decItemQty(item.id);
             }}
@@ -82,10 +83,11 @@ export default function SingleCartItem(props) {
             value={item.qty}
             type="number"
             label="Quantity"
+            className="cart-qty"
           />
 
           <MDBBtn
-            className="px-3 ms-2"
+            className="px-3 ms-2 cart-dec-btn"
             onClick={() => {
               incItemQty(item.id);
             }}
