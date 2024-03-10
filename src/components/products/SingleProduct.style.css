@@ -1,0 +1,13 @@
+.single-product .product-img {
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+}   
+
+.single-product .product-title{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 16px;
+}

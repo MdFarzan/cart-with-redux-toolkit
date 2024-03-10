@@ -1,13 +1,14 @@
 import { MDBCol, MDBRow } from "mdb-react-ui-kit";
 import SingleProduct from "./SingleProduct";
+import { products } from "../../data/products.js";
 
 export default function ProductList(props) {
   return (
     <section className="products-list">
       <MDBRow className="mb-3">
-        <MDBCol lg="4">
-          <SingleProduct />
-        </MDBCol>
+        {products.map((item, index) => {
+          return <SingleProduct item={item} key={`product-list-${index}`} />;
+        })}
       </MDBRow>
     </section>
   );
