@@ -7,9 +7,28 @@ import {
   MDBRow,
   MDBTooltip,
 } from "mdb-react-ui-kit";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decQty,
+  getCartSelector,
+  incQty,
+  removeFromCart,
+} from "../../redux/slices/cartSlice";
 
 export default function SingleCartItem(props) {
   const { item } = { ...props };
+  const dispatch = useDispatch();
+
+  const incItemQty = (item_id) => {
+    dispatch(incQty({ id: item_id }));
+  };
+  const decItemQty = (item_id) => {
+    dispatch(decQty({ id: item_id }));
+  };
+
+  const removeItemFromCart = (item_id) => {
+    dispatch(removeFromCart({ id: item_id }));
+  };
 
   return (
     <MDBRow>
@@ -34,29 +53,51 @@ export default function SingleCartItem(props) {
           <strong>{item.name}</strong>
         </p>
 
-        <MDBTooltip
+        <MDBBtn
           wrapperProps={{ size: "sm" }}
           wrapperClass="me-1 mb-2"
           title="Remove item"
+          color="danger"
+          onClick={() => {
+            removeItemFromCart(item.id);
+          }}
         >
           <MDBIcon fas icon="trash" />
-        </MDBTooltip>
+        </MDBBtn>
       </MDBCol>
       <MDBCol lg="4" md="6" className="mb-4 mb-lg-0">
         <div className="d-flex mb-4">
-          <MDBBtn className="px-3 me-2">
+          <MDBBtn
+            className="px-3 me-2"
+            onClick={() => {
+              decItemQty(item.id);
+            }}
+          >
             <MDBIcon fas icon="minus" />
           </MDBBtn>
 
-          <MDBInput defaultValue={1} min={0} type="number" label="Quantity" />
+          <MDBInput
+            defaultValue={1}
+            min={1}
+            value={item.qty}
+            type="number"
+            label="Quantity"
+          />
 
-          <MDBBtn className="px-3 ms-2">
+          <MDBBtn
+            className="px-3 ms-2"
+            onClick={() => {
+              incItemQty(item.id);
+            }}
+          >
             <MDBIcon fas icon="plus" />
           </MDBBtn>
         </div>
 
         <p className="text-start text-md-center">
-          <strong>{item.price}</strong>
+          <strong>
+            <h5>₹ {item.price * item.qty}</h5>
+          </strong>
         </p>
       </MDBCol>
       <hr className="my-4" />

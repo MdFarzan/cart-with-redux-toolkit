@@ -17,8 +17,9 @@ import {
   incQty,
   decQty,
   addToCart,
+  getCartSelector,
 } from "./../../redux/slices/cartSlice.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SingleProduct(props) {
   const { item } = { ...props };
@@ -34,6 +35,11 @@ export default function SingleProduct(props) {
     setAddedToCart(false);
     dispatch(removeFromCart({ id: id }));
   };
+
+  const cart = useSelector(getCartSelector);
+
+  let isExistsInCart = cart.findIndex((cartItem) => cartItem.id == item.id);
+  isExistsInCart = isExistsInCart == -1 ? false : true;
 
   return (
     <MDBCol lg="4">
@@ -67,7 +73,7 @@ export default function SingleProduct(props) {
           </MDBRow>
 
           <div className="mt-3 d-grid gap-2">
-            {addedToCart ? (
+            {isExistsInCart ? (
               <MDBBtn
                 color="danger"
                 onClick={() => {

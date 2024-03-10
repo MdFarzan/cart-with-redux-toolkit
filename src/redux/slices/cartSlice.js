@@ -23,10 +23,24 @@ const cartSlice = createSlice({
       return restItems;
     },
     incQty: (state, action) => {
-      return { ...state };
+      var cart = current(state).map((item) => {
+        if (item.id == action.payload.id) {
+          return { ...item, qty: item.qty + 1 };
+        } else {
+          return item;
+        }
+      });
+      return cart;
     },
     decQty: (state, action) => {
-      return { ...state };
+      var cart = current(state).map((item) => {
+        if (item.id == action.payload.id && item.qty != 1) {
+          return { ...item, qty: item.qty - 1 };
+        } else {
+          return item;
+        }
+      });
+      return cart;
     },
   },
 });
